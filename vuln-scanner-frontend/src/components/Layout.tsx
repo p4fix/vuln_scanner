@@ -72,6 +72,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <p className="mt-1">
               Use responsibly and only on systems you own or have explicit permission to test.
             </p>
+            <div className="mt-3 pt-3 border-t border-gray-100">
+              <p className="text-xs text-gray-400">
+                Developed by{' '}
+                <a 
+                  href="https://github.com/p4fix" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-primary-600 hover:text-primary-700 font-medium transition-colors"
+                >
+                  @p4fix
+                </a>
+                {' '}on GitHub
+              </p>
+            </div>
           </div>
         </div>
       </footer>
