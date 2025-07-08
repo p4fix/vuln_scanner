@@ -46,7 +46,35 @@ A full-stack web application for performing security scans including website acc
    python app.py
    ```
 
-The API will be available at `http://localhost:5000`
+## Verifying the API is Running
+
+After starting the API server, you can verify it is running by sending a test request to the root or health endpoint:
+
+```bash
+curl http://localhost:5000/
+# or
+curl http://localhost:5000/health
+```
+
+A successful response indicates the API is up and running.
+
+## Changing API Host and Port
+
+You can change the API's host and port by editing `vuln_scanner_api/config.py` or by setting environment variables before starting the server:
+
+- **In `config.py`:**
+  - `HOST` (default: `0.0.0.0`)
+  - `PORT` (default: `5000`)
+
+- **Using environment variables:**
+  ```bash
+  set HOST=127.0.0.1
+  set PORT=8080
+  python app.py
+  ```
+  (On Windows, use `set`. On Linux/macOS, use `export`.)
+
+The API will then be available at the new host and port you specify.
 
 #### Frontend Setup
 
