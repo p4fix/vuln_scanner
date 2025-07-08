@@ -10,7 +10,12 @@ class Config:
     PORT = int(os.getenv('PORT', 5000))
     
     # Security Settings
-    ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+    ALLOWED_HOSTS = [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "http://localhost:5000",
+        "http://127.0.0.1:5000"
+    ]
     MAX_REQUESTS_PER_MINUTE = int(os.getenv('MAX_REQUESTS_PER_MINUTE', 60))
     REQUEST_TIMEOUT = int(os.getenv('REQUEST_TIMEOUT', 10))
     

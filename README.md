@@ -1,104 +1,136 @@
-# Vulnerability Scanner Frontend
+# Vulnerability Scanner
 
-A modern React TypeScript frontend for the Vulnerability Scanner API. This provides a beautiful, user-friendly interface for performing security scanning operations.
+A full-stack web application for performing security scans including website accessibility checks, port scanning, and banner grabbing.
 
 ## Features
 
-- **Modern UI/UX**: Clean, responsive design with Tailwind CSS
-- **Real-time API Status**: Monitors API connectivity
-- **Three Scanning Tools**:
-  - Website Accessibility Check
-  - Port Scanner
-  - Banner Grabber
-- **Configuration Management**: Easy API settings configuration
-- **Error Handling**: Comprehensive error messages and validation
-- **Security Notices**: Built-in warnings for responsible usage
+- **Website Check**: Verify if websites are accessible and get response details
+- **Port Scanner**: Check if specific ports are open on target hosts
+- **Banner Grabber**: Attempt to retrieve banner information from open ports
+- **Secure API**: Rate-limited API with authentication
+- **Modern UI**: React-based frontend with Tailwind CSS
 
-## Screenshots
+## Quick Start
 
-The frontend provides a clean, professional interface with:
-- Header with API status indicator
-- Configuration panel for API settings
-- Tabbed interface for different scanning tools
-- Real-time results display
-- Security warnings and notices
+### Option 1: Use the provided batch files (Windows)
 
-## Installation
+1. **Start Everything at Once:**
+   ```
+   start_all.bat
+   ```
 
-### Prerequisites
+2. **Or Start Separately:**
+   ```
+   start_api.bat      # Starts the API server
+   start_frontend.bat # Starts the frontend
+   ```
 
-- Node.js (v14 or higher)
-- npm or yarn
-- The Vulnerability Scanner API running on `http://localhost:5000`
+### Option 2: Manual Setup
 
-### Setup
+#### Prerequisites
 
-1. **Install dependencies**:
+- Python 3.7+
+- Node.js 14+
+- npm
+
+#### Backend Setup
+
+1. Install Python dependencies:
    ```bash
+   pip install -r requirements.txt
+   ```
+
+2. Start the API server:
+   ```bash
+   cd vuln_scanner_api
+   python app.py
+   ```
+
+The API will be available at `http://localhost:5000`
+
+#### Frontend Setup
+
+1. Install Node.js dependencies:
+   ```bash
+   cd vuln-scanner-frontend
    npm install
    ```
 
-2. **Configure the API**:
-   - Update the API key in the configuration panel
-   - Ensure the API server is running on `http://localhost:5000`
-
-3. **Start the development server**:
+2. Start the frontend:
    ```bash
    npm start
    ```
 
-4. **Open your browser**:
-   Navigate to `http://localhost:3000`
+The frontend will be available at `http://localhost:3000`
 
-## Usage
+## API Configuration
 
-### Configuration
+The frontend is pre-configured with:
+- **API Base URL**: `http://localhost:5000`
+- **API Key**: `your-secret-api-key-here`
 
-1. Click "Configure" in the API Configuration panel
-2. Enter your API base URL (default: `http://localhost:5000`)
-3. Enter your API key
-4. Click "Save Configuration"
+You can change these settings in the frontend's Configuration Panel.
 
-### Website Check
+## API Endpoints
 
-1. Select the "Website Check" tab
-2. Enter a URL to test (e.g., `https://example.com`)
-3. Click "Check"
-4. View the results showing status code and accessibility
+- `GET /` - API information
+- `GET /health` - Health check
+- `POST /check_website` - Check website accessibility
+- `POST /check_port` - Check port status
+- `POST /banner_grab` - Grab banner information
 
-### Port Scanner
+All POST endpoints require the `X-API-Key` header.
 
-1. Select the "Port Scanner" tab
-2. Enter a hostname (e.g., `example.com`)
-3. Enter a port number (1-65535)
-4. Click "Scan Port"
-5. View the results showing if the port is open or closed
+## Security Notice
 
-### Banner Grabber
+This tool is designed for educational and authorized security testing purposes only. Always ensure you have explicit permission before scanning any systems you do not own.
 
-1. Select the "Banner Grabber" tab
-2. Enter a hostname and port
-3. Click "Grab Banner"
-4. View the banner information retrieved from the port
-5. Use the "Copy" button to copy banner data to clipboard
+## Troubleshooting
+
+### API Connection Issues
+
+1. **Check if API server is running:**
+   ```bash
+   curl http://localhost:5000/health
+   ```
+
+2. **Verify API key:**
+   - Default API key is `your-secret-api-key-here`
+   - You can change it in `vuln_scanner_api/config.py`
+
+3. **Check CORS settings:**
+   - The API allows requests from `localhost` and `127.0.0.1`
+   - Update `ALLOWED_HOSTS` in config if needed
+
+### Frontend Issues
+
+1. **Check if frontend is running:**
+   - Open `http://localhost:3000` in your browser
+
+2. **Clear browser cache** if you see stale data
+
+3. **Check browser console** for any JavaScript errors
 
 ## Project Structure
 
 ```
-src/
-├── components/
-│   ├── Layout.tsx          # Main layout with header/navigation
-│   ├── WebsiteCheck.tsx    # Website accessibility checker
-│   ├── PortScan.tsx        # Port scanner component
-│   ├── BannerGrab.tsx      # Banner grabber component
-│   └── ConfigPanel.tsx     # API configuration panel
-├── services/
-│   └── api.ts              # API service layer
-├── types/
-│   └── index.ts            # TypeScript type definitions
-├── App.tsx                 # Main application component
-├── index.tsx               # Application entry point
-└── index.css               # Global styles with Tailwind
+Vuln Scanner/
+├── vuln_scanner_api/          # Flask API backend
+│   ├── app.py                 # Main API application
+│   ├── config.py              # Configuration settings
+│   ├── scanner.py             # Core scanning functions
+│   ├── input_validators.py    # Input validation
+│   └── middleware.py          # Security middleware
+├── vuln-scanner-frontend/     # React frontend
+│   ├── src/
+│   │   ├── components/        # React components
+│   │   ├── services/          # API service layer
+│   │   └── types/            # TypeScript types
+│   └── package.json
+├── requirements.txt           # Python dependencies
+├── start_api.bat             # API startup script
+├── start_frontend.bat        # Frontend startup script
+└── start_all.bat             # Full stack startup script
 ```
 
 ## Technologies Used
