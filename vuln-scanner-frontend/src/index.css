@@ -12,6 +12,12 @@ body {
   background-color: #f8fafc;
 }
 
+/* Dark mode support */
+body.dark {
+  background-color: #18181b;
+  color: #f4f4f5;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
