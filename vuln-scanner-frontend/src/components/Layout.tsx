@@ -24,12 +24,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-zinc-900 dark:text-zinc-100">
       {/* Header */}
-      <header className="bg-white dark:bg-zinc-800 shadow-sm border-b border-gray-200 dark:border-zinc-700">
+      <header className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-zinc-800 dark:to-zinc-900 shadow-lg border-b border-gray-200 dark:border-zinc-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+          <div className="flex justify-between items-center h-20">
             <div className="flex items-center">
-              <Shield className="h-8 w-8 text-primary-600 dark:text-primary-400" />
-              <h1 className="ml-3 text-xl font-semibold text-gray-900 dark:text-zinc-100">
+              <Shield className="h-10 w-10 text-primary-600 dark:text-primary-400" />
+              <h1 className="ml-4 text-3xl font-bold text-gray-900 dark:text-zinc-100 font-serif tracking-wide">
                 Vulnerability Scanner
               </h1>
             </div>
