@@ -36,12 +36,19 @@ body {
   background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
   min-height: 100vh;
   overflow-x: hidden;
+  transition: background 0.5s ease;
 }
 
 /* Dark mode support */
 body.dark {
   background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 25%, #2d2d2d 50%, #1f1f1f 75%, #0d0d0d 100%);
   color: #f4f4f5;
+}
+
+/* Light mode support */
+body.light {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #1a1a1a;
 }
 
 /* 3D Card Effects */
@@ -79,6 +86,7 @@ body.dark {
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+  transition: all 0.3s ease;
 }
 
 .glass-dark {
@@ -86,6 +94,7 @@ body.dark {
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
 }
 
 /* Animated Background */
@@ -259,4 +268,58 @@ code {
 
 .gradient-dark-5 {
   background: linear-gradient(135deg, #1f1f1f 0%, #2d2d2d 50%, #0d0d0d 100%);
+}
+
+/* Light Gradient Combinations */
+.gradient-light-1 {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.gradient-light-2 {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.gradient-light-3 {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+/* Dark mode specific styles */
+.dark .glass {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .card-3d {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dark .btn-3d {
+  background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+  box-shadow: 5px 5px 10px #0d0d0d, -5px -5px 10px #1a1a1a;
+}
+
+.dark .btn-3d:active {
+  box-shadow: inset 5px 5px 10px #0d0d0d, inset -5px -5px 10px #1a1a1a;
+}
+
+/* Light mode specific styles */
+.light .glass {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.light .card-3d {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.light .btn-3d {
+  background: linear-gradient(145deg, #ffffff, #e6e6e6);
+  box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
+  color: #1a1a1a;
+}
+
+.light .btn-3d:active {
+  box-shadow: inset 5px 5px 10px #d1d1d1, inset -5px -5px 10px #ffffff;
 } 
