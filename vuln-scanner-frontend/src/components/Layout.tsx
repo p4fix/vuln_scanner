@@ -15,10 +15,12 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab = 'website-check', 
 
   useEffect(() => {
     if (darkMode) {
+      document.body.classList.remove('light');
       document.body.classList.add('dark');
       localStorage.setItem('theme', 'dark');
     } else {
       document.body.classList.remove('dark');
+      document.body.classList.add('light');
       localStorage.setItem('theme', 'light');
     }
   }, [darkMode]);
@@ -33,7 +35,7 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab = 'website-check', 
     <div className="min-h-screen relative overflow-hidden">
       {/* Animated Background Particles */}
       <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 gradient-dark-1"></div>
+        <div className={`absolute inset-0 ${darkMode ? 'gradient-dark-1' : 'gradient-light-1'}`}></div>
         <div className="absolute top-0 left-0 w-full h-full">
           {[...Array(15)].map((_, i) => (
             <div
@@ -52,7 +54,7 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab = 'website-check', 
 
       {/* Header with Glassmorphism */}
       <header className="relative z-10">
-        <div className="glass border-b border-white/20 backdrop-blur-md">
+        <div className="glass border-b border-white/10 backdrop-blur-md">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-20">
               <div className="flex items-center space-x-4">
@@ -78,7 +80,7 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab = 'website-check', 
                 {/* Dark mode toggle with 3D effect */}
                 <button
                   onClick={() => setDarkMode((prev) => !prev)}
-                  className="btn-3d px-4 py-2 rounded-lg text-gray-800 font-medium transition-all duration-300 hover:scale-105"
+                  className="btn-3d px-4 py-2 rounded-lg font-medium transition-all duration-300 hover:scale-105"
                   aria-label="Toggle dark mode"
                 >
                   {darkMode ? '🌙 Dark' : '☀️ Light'}
@@ -95,7 +97,7 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab = 'website-check', 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div 
               className={`card-3d rounded-xl p-6 text-center group cursor-pointer transform transition-all duration-300 hover:scale-105 ${
-                activeTab === 'website-check' ? 'ring-2 ring-blue-400 glow' : ''
+                activeTab === 'website-check' ? 'ring-2 ring-blue-400/50 glow' : ''
               }`}
               onClick={() => handleTabClick('website-check')}
             >
@@ -112,7 +114,7 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab = 'website-check', 
             
             <div 
               className={`card-3d rounded-xl p-6 text-center group cursor-pointer transform transition-all duration-300 hover:scale-105 ${
-                activeTab === 'port-scan' ? 'ring-2 ring-purple-400 glow' : ''
+                activeTab === 'port-scan' ? 'ring-2 ring-purple-400/50 glow' : ''
               }`}
               onClick={() => handleTabClick('port-scan')}
             >
@@ -129,7 +131,7 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab = 'website-check', 
             
             <div 
               className={`card-3d rounded-xl p-6 text-center group cursor-pointer transform transition-all duration-300 hover:scale-105 ${
-                activeTab === 'banner-grab' ? 'ring-2 ring-green-400 glow' : ''
+                activeTab === 'banner-grab' ? 'ring-2 ring-green-400/50 glow' : ''
               }`}
               onClick={() => handleTabClick('banner-grab')}
             >
@@ -156,7 +158,7 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab = 'website-check', 
 
       {/* Footer with 3D Effects */}
       <footer className="relative z-10 mt-16">
-        <div className="glass border-t border-white/20 backdrop-blur-md">
+        <div className="glass border-t border-white/10 backdrop-blur-md">
           <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4">
               <div className="flex justify-center space-x-8 mb-6">
@@ -183,7 +185,7 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab = 'website-check', 
                 </p>
               </div>
               
-              <div className="pt-4 border-t border-white/20">
+              <div className="pt-4 border-t border-white/10">
                 <p className="text-white/50 text-xs">
                   Developed by{' '}
                   <a 
