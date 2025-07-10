@@ -1,0 +1,1 @@
+web: cd vuln_scanner_api && python app.py 
