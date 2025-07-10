@@ -1,0 +1,21 @@
+{
+  "name": "vuln-scanner-auto-commit",
+  "version": "1.0.0",
+  "description": "Auto-commit watcher for Vulnerability Scanner project",
+  "main": "auto-commit.js",
+  "scripts": {
+    "start": "node auto-commit.js",
+    "dev": "node auto-commit.js",
+    "watch": "node auto-commit.js"
+  },
+  "keywords": [
+    "git",
+    "auto-commit",
+    "watcher",
+    "vulnerability-scanner"
+  ],
+  "author": "p4fix",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+} 

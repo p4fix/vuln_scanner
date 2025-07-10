@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Shield, Globe, Server, Settings, Activity } from 'lucide-react';
+import { Shield, Globe, Server, Settings, Activity, Zap, Cpu, Network } from 'lucide-react';
 
 interface LayoutProps {
   children: React.ReactNode;
+  activeTab?: string;
+  onTabChange?: (tab: string) => void;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: React.FC<LayoutProps> = ({ children, activeTab = 'website-check', onTabChange }) => {
   const [darkMode, setDarkMode] = useState(() => {
     // Check localStorage for user preference
     return localStorage.getItem('theme') === 'dark';
@@ -21,93 +23,180 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     }
   }, [darkMode]);
 
+  const handleTabClick = (tab: string) => {
+    if (onTabChange) {
+      onTabChange(tab);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-zinc-900 dark:text-zinc-100">
-      {/* Header */}
-      <header className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-zinc-800 dark:to-zinc-900 shadow-lg border-b border-gray-200 dark:border-zinc-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <div className="flex items-center">
-              <Shield className="h-10 w-10 text-primary-600 dark:text-primary-400" />
-              <h1 className="ml-4 text-3xl font-bold text-gray-900 dark:text-zinc-100 font-serif tracking-wide">
-                Vulnerability Scanner
-              </h1>
-            </div>
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center text-sm text-gray-500 dark:text-zinc-300">
-                <Activity className="h-4 w-4 mr-1" />
-                <span>API Status: Online</span>
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Animated Background Particles */}
+      <div className="fixed inset-0 -z-10">
+        <div className="absolute inset-0 gradient-dark-1"></div>
+        <div className="absolute top-0 left-0 w-full h-full">
+          {[...Array(15)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-white rounded-full opacity-10 float"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${3 + Math.random() * 2}s`
+              }}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Header with Glassmorphism */}
+      <header className="relative z-10">
+        <div className="glass border-b border-white/20 backdrop-blur-md">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center h-20">
+              <div className="flex items-center space-x-4">
+                <div className="relative">
+                  <Shield className="h-12 w-12 text-blue-400 float" />
+                  <div className="absolute inset-0 bg-blue-400 rounded-full opacity-10 blur-xl"></div>
+                </div>
+                <div>
+                  <h1 className="text-4xl font-bold text-white font-serif tracking-wide">
+                    Vulnerability Scanner
+                  </h1>
+                  <p className="text-blue-200 text-sm">Advanced Security Analysis Tool</p>
+                </div>
               </div>
-              {/* Dark mode toggle */}
-              <button
-                onClick={() => setDarkMode((prev) => !prev)}
-                className="ml-4 px-3 py-1 rounded bg-gray-200 dark:bg-zinc-700 text-gray-800 dark:text-zinc-100 hover:bg-gray-300 dark:hover:bg-zinc-600 transition-colors"
-                aria-label="Toggle dark mode"
-              >
-                {darkMode ? '🌙 Dark' : '☀️ Light'}
-              </button>
+              
+              <div className="flex items-center space-x-6">
+                {/* Status Indicator */}
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-green-400 rounded-full pulse"></div>
+                  <span className="text-white text-sm">API Online</span>
+                </div>
+                
+                {/* Dark mode toggle with 3D effect */}
+                <button
+                  onClick={() => setDarkMode((prev) => !prev)}
+                  className="btn-3d px-4 py-2 rounded-lg text-gray-800 font-medium transition-all duration-300 hover:scale-105"
+                  aria-label="Toggle dark mode"
+                >
+                  {darkMode ? '🌙 Dark' : '☀️ Light'}
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Navigation */}
-      <nav className="bg-white dark:bg-zinc-800 shadow-sm border-b border-gray-200 dark:border-zinc-700">
+      {/* Navigation with 3D Cards */}
+      <nav className="relative z-10 py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex space-x-8">
-            <a
-              href="#website-check"
-              className="flex items-center py-4 px-1 border-b-2 border-transparent text-sm font-medium text-gray-500 dark:text-zinc-300 hover:text-gray-700 dark:hover:text-zinc-100 hover:border-gray-300 dark:hover:border-zinc-500"
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div 
+              className={`card-3d rounded-xl p-6 text-center group cursor-pointer transform transition-all duration-300 hover:scale-105 ${
+                activeTab === 'website-check' ? 'ring-2 ring-blue-400 glow' : ''
+              }`}
+              onClick={() => handleTabClick('website-check')}
             >
-              <Globe className="h-4 w-4 mr-2" />
-              Website Check
-            </a>
-            <a
-              href="#port-scan"
-              className="flex items-center py-4 px-1 border-b-2 border-transparent text-sm font-medium text-gray-500 dark:text-zinc-300 hover:text-gray-700 dark:hover:text-zinc-100 hover:border-gray-300 dark:hover:border-zinc-500"
+              <div className="flex flex-col items-center space-y-3">
+                <div className={`p-3 rounded-full transition-all duration-300 ${
+                  activeTab === 'website-check' ? 'bg-blue-500/20' : 'bg-blue-500/10'
+                }`}>
+                  <Globe className="h-8 w-8 text-blue-400" />
+                </div>
+                <h3 className="text-lg font-semibold text-white">Website Check</h3>
+                <p className="text-blue-200 text-sm">Analyze website accessibility</p>
+              </div>
+            </div>
+            
+            <div 
+              className={`card-3d rounded-xl p-6 text-center group cursor-pointer transform transition-all duration-300 hover:scale-105 ${
+                activeTab === 'port-scan' ? 'ring-2 ring-purple-400 glow' : ''
+              }`}
+              onClick={() => handleTabClick('port-scan')}
             >
-              <Server className="h-4 w-4 mr-2" />
-              Port Scan
-            </a>
-            <a
-              href="#banner-grab"
-              className="flex items-center py-4 px-1 border-b-2 border-transparent text-sm font-medium text-gray-500 dark:text-zinc-300 hover:text-gray-700 dark:hover:text-zinc-100 hover:border-gray-300 dark:hover:border-zinc-500"
+              <div className="flex flex-col items-center space-y-3">
+                <div className={`p-3 rounded-full transition-all duration-300 ${
+                  activeTab === 'port-scan' ? 'bg-purple-500/20' : 'bg-purple-500/10'
+                }`}>
+                  <Server className="h-8 w-8 text-purple-400" />
+                </div>
+                <h3 className="text-lg font-semibold text-white">Port Scanner</h3>
+                <p className="text-purple-200 text-sm">Scan open ports</p>
+              </div>
+            </div>
+            
+            <div 
+              className={`card-3d rounded-xl p-6 text-center group cursor-pointer transform transition-all duration-300 hover:scale-105 ${
+                activeTab === 'banner-grab' ? 'ring-2 ring-green-400 glow' : ''
+              }`}
+              onClick={() => handleTabClick('banner-grab')}
             >
-              <Settings className="h-4 w-4 mr-2" />
-              Banner Grab
-            </a>
+              <div className="flex flex-col items-center space-y-3">
+                <div className={`p-3 rounded-full transition-all duration-300 ${
+                  activeTab === 'banner-grab' ? 'bg-green-500/20' : 'bg-green-500/10'
+                }`}>
+                  <Settings className="h-8 w-8 text-green-400" />
+                </div>
+                <h3 className="text-lg font-semibold text-white">Banner Grab</h3>
+                <p className="text-green-200 text-sm">Extract service banners</p>
+              </div>
+            </div>
           </div>
         </div>
       </nav>
 
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        {children}
+      {/* Main Content with Glassmorphism */}
+      <main className="relative z-10 max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <div className="glass rounded-2xl p-8 backdrop-blur-md">
+          {children}
+        </div>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-white dark:bg-zinc-800 border-t border-gray-200 dark:border-zinc-700 mt-auto">
-        <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-          <div className="text-center text-sm text-gray-500 dark:text-zinc-400">
-            <p>
-              Vulnerability Scanner API - For educational and authorized testing purposes only.
-            </p>
-            <p className="mt-1">
-              Use responsibly and only on systems you own or have explicit permission to test.
-            </p>
-            <div className="mt-3 pt-3 border-t border-gray-100 dark:border-zinc-700">
-              <p className="text-xs text-gray-400 dark:text-zinc-500">
-                Developed by{' '}
-                <a 
-                  href="https://github.com/p4fix" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium transition-colors"
-                >
-                  @p4fix
-                </a>
-                {' '}on GitHub
-              </p>
+      {/* Footer with 3D Effects */}
+      <footer className="relative z-10 mt-16">
+        <div className="glass border-t border-white/20 backdrop-blur-md">
+          <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+            <div className="text-center space-y-4">
+              <div className="flex justify-center space-x-8 mb-6">
+                <div className="flex items-center space-x-2">
+                  <Cpu className="h-5 w-5 text-blue-400" />
+                  <span className="text-white text-sm">Advanced Scanning</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Network className="h-5 w-5 text-purple-400" />
+                  <span className="text-white text-sm">Network Analysis</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Zap className="h-5 w-5 text-green-400" />
+                  <span className="text-white text-sm">Real-time Results</span>
+                </div>
+              </div>
+              
+              <div className="text-white/70 text-sm space-y-2">
+                <p>
+                  Vulnerability Scanner API - For educational and authorized testing purposes only.
+                </p>
+                <p>
+                  Use responsibly and only on systems you own or have explicit permission to test.
+                </p>
+              </div>
+              
+              <div className="pt-4 border-t border-white/20">
+                <p className="text-white/50 text-xs">
+                  Developed by{' '}
+                  <a 
+                    href="https://github.com/p4fix" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-blue-400 hover:text-blue-300 font-medium transition-colors"
+                  >
+                    @p4fix
+                  </a>
+                  {' '}on GitHub
+                </p>
+              </div>
             </div>
           </div>
         </div>

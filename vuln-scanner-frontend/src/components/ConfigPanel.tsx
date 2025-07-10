@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Settings, Save, Eye, EyeOff } from 'lucide-react';
+import { Settings, Save, Eye, EyeOff, Zap, Key, Globe } from 'lucide-react';
 import { ApiConfig } from '../types';
 import ApiService from '../services/api';
 
@@ -35,90 +35,108 @@ const ConfigPanel: React.FC<ConfigPanelProps> = ({ apiService, onConfigUpdate })
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <div className="card-3d rounded-xl p-6">
       <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center">
-          <Settings className="h-6 w-6 text-primary-600 mr-3" />
-          <h2 className="text-xl font-semibold text-gray-900">API Configuration</h2>
+        <div className="flex items-center space-x-3">
+          <div className="relative">
+            <Settings className="h-8 w-8 text-blue-400 float" />
+            <div className="absolute inset-0 bg-blue-400 rounded-full opacity-20 blur-xl"></div>
+          </div>
+          <div>
+            <h2 className="text-2xl font-bold text-white">API Configuration</h2>
+            <p className="text-blue-200 text-sm">Configure your vulnerability scanner API settings</p>
+          </div>
         </div>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="text-sm text-primary-600 hover:text-primary-700"
+          className="btn-3d px-4 py-2 rounded-lg text-white font-medium hover:scale-105 transition-all duration-300"
         >
-          {isOpen ? 'Hide' : 'Configure'}
+          {isOpen ? 'Hide Config' : 'Configure API'}
         </button>
       </div>
 
       {isOpen && (
-        <div className="space-y-4">
-          <div>
-            <label htmlFor="baseURL" className="block text-sm font-medium text-gray-700 mb-2">
-              API Base URL
-            </label>
-            <input
-              type="url"
-              id="baseURL"
-              value={config.baseURL}
-              onChange={(e) => handleInputChange('baseURL', e.target.value)}
-              placeholder="http://localhost:5000"
-              className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
-            />
-            <p className="mt-1 text-sm text-gray-500">
-              The base URL of your vulnerability scanner API
-            </p>
-          </div>
+        <div className="space-y-6">
+          <div className="card-3d rounded-lg p-6">
+            <div className="space-y-6">
+              <div>
+                <label htmlFor="baseURL" className="block text-lg font-semibold text-white mb-3">
+                  API Base URL
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Globe className="h-5 w-5 text-blue-300" />
+                  </div>
+                  <input
+                    type="url"
+                    id="baseURL"
+                    value={config.baseURL}
+                    onChange={(e) => handleInputChange('baseURL', e.target.value)}
+                    placeholder="http://localhost:5000"
+                    className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                  />
+                </div>
+                <p className="mt-2 text-blue-200 text-sm">
+                  The base URL of your vulnerability scanner API server
+                </p>
+              </div>
 
-          <div>
-            <label htmlFor="apiKey" className="block text-sm font-medium text-gray-700 mb-2">
-              API Key
-            </label>
-            <div className="relative">
-              <input
-                type={showApiKey ? 'text' : 'password'}
-                id="apiKey"
-                value={config.apiKey}
-                onChange={(e) => handleInputChange('apiKey', e.target.value)}
-                placeholder="your-secret-api-key-here"
-                className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 pr-10"
-              />
-              <button
-                type="button"
-                onClick={() => setShowApiKey(!showApiKey)}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center"
-              >
-                {showApiKey ? (
-                  <EyeOff className="h-4 w-4 text-gray-400" />
-                ) : (
-                  <Eye className="h-4 w-4 text-gray-400" />
-                )}
-              </button>
+              <div>
+                <label htmlFor="apiKey" className="block text-lg font-semibold text-white mb-3">
+                  API Key
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Key className="h-5 w-5 text-blue-300" />
+                  </div>
+                  <input
+                    type={showApiKey ? 'text' : 'password'}
+                    id="apiKey"
+                    value={config.apiKey}
+                    onChange={(e) => handleInputChange('apiKey', e.target.value)}
+                    placeholder="your-secret-api-key-here"
+                    className="w-full pl-10 pr-12 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowApiKey(!showApiKey)}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-blue-300 hover:text-blue-200 transition-colors"
+                  >
+                    {showApiKey ? (
+                      <EyeOff className="h-5 w-5" />
+                    ) : (
+                      <Eye className="h-5 w-5" />
+                    )}
+                  </button>
+                </div>
+                <p className="mt-2 text-blue-200 text-sm">
+                  Your API key for authentication and security
+                </p>
+              </div>
             </div>
-            <p className="mt-1 text-sm text-gray-500">
-              Your API key for authentication
-            </p>
           </div>
 
-          <div className="flex justify-end space-x-3 pt-4">
+          <div className="flex justify-end space-x-4">
             <button
               onClick={() => setIsOpen(false)}
-              className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+              className="btn-3d px-6 py-3 rounded-lg text-white font-medium hover:scale-105 transition-all duration-300"
             >
               Cancel
             </button>
             <button
               onClick={handleSave}
               disabled={isSaving}
-              className="px-4 py-2 text-sm font-medium text-white bg-primary-600 border border-transparent rounded-md hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+              className="btn-3d px-6 py-3 rounded-lg text-white font-semibold flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 transition-all duration-300"
             >
               {isSaving ? (
                 <>
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                  Saving...
+                  <div className="spinner"></div>
+                  <span>Saving...</span>
                 </>
               ) : (
                 <>
-                  <Save className="h-4 w-4 mr-2" />
-                  Save Configuration
+                  <Save className="h-5 w-5" />
+                  <span>Save Configuration</span>
                 </>
               )}
             </button>
@@ -127,9 +145,23 @@ const ConfigPanel: React.FC<ConfigPanelProps> = ({ apiService, onConfigUpdate })
       )}
 
       {!isOpen && (
-        <div className="text-sm text-gray-600">
-          <p>API Base URL: <span className="font-mono">{config.baseURL}</span></p>
-          <p>API Key: <span className="font-mono">••••••••••••••••</span></p>
+        <div className="card-3d rounded-lg p-6">
+          <div className="space-y-4">
+            <div className="flex items-center space-x-3">
+              <Zap className="h-5 w-5 text-blue-400" />
+              <h3 className="text-lg font-semibold text-white">Current Configuration</h3>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <p className="text-blue-200 text-sm">API Base URL:</p>
+                <p className="text-white font-mono text-sm bg-white/10 rounded px-3 py-2">{config.baseURL}</p>
+              </div>
+              <div className="space-y-2">
+                <p className="text-blue-200 text-sm">API Key:</p>
+                <p className="text-white font-mono text-sm bg-white/10 rounded px-3 py-2">••••••••••••••••</p>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>
