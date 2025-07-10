@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: vuln-scanner-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: cd vuln_scanner_api && python app.py
+    envVars:
+      - key: API_KEY
+        value: your-secret-api-key-here
+      - key: DEBUG
+        value: false
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: 5000 

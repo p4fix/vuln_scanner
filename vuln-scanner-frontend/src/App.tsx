@@ -8,8 +8,8 @@ import ApiService from './services/api';
 
 const App: React.FC = () => {
   const [apiService] = useState(() => new ApiService({
-    baseURL: 'http://localhost:5000',
-    apiKey: 'your-secret-api-key-here'
+    baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000',
+    apiKey: process.env.REACT_APP_API_KEY || 'your-secret-api-key-here'
   }));
 
   const [activeTab, setActiveTab] = useState('website-check');
