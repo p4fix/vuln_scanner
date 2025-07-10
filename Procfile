@@ -1,1 +1,1 @@
-web: cd vuln_scanner_api && python app.py 
+web: python vuln_scanner_api/app.py 
