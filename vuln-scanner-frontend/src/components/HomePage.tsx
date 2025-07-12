@@ -132,7 +132,7 @@ const HomePage: React.FC = () => {
             return (
               <div
                 key={index}
-                className={`card-3d rounded-xl p-8 text-center group cursor-pointer transform transition-all duration-500 hover:scale-105 hover:-translate-y-2 ${colorClasses.border} ${colorClasses.hover} ${colorClasses.glow}`}
+                className={`card-3d service-card rounded-xl p-8 text-center group cursor-pointer transform transition-all duration-500 hover:scale-105 hover:-translate-y-2 ${colorClasses.border} ${colorClasses.hover} ${colorClasses.glow} stagger-animation`}
               >
                 <div className="space-y-6">
                   {/* Icon with floating animation */}
@@ -144,10 +144,10 @@ const HomePage: React.FC = () => {
 
                   {/* Title with pop-up effect */}
                   <div className="space-y-3">
-                    <h3 className="text-2xl font-bold text-white group-hover:scale-105 transition-transform duration-300">
+                    <h3 className="text-2xl font-bold text-white text-pop group-hover:scale-105 transition-transform duration-300">
                       {service.title}
                     </h3>
-                    <p className="text-blue-200 leading-relaxed group-hover:text-white transition-colors duration-300">
+                    <p className="text-blue-200 leading-relaxed text-pop group-hover:text-white transition-colors duration-300">
                       {service.description}
                     </p>
                   </div>
@@ -157,7 +157,7 @@ const HomePage: React.FC = () => {
                     {service.features.map((feature, featureIndex) => (
                       <div key={featureIndex} className="flex items-center space-x-2 text-sm">
                         <CheckCircle className={`h-4 w-4 ${colorClasses.text} flex-shrink-0`} />
-                        <span className="text-blue-200 group-hover:text-white transition-colors duration-300">
+                        <span className="text-blue-200 text-pop group-hover:text-white transition-colors duration-300">
                           {feature}
                         </span>
                       </div>
