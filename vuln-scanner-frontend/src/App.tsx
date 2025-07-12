@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Layout from './components/Layout';
+import HomePage from './components/HomePage';
 import WebsiteCheck from './components/WebsiteCheck';
 import PortScan from './components/PortScan';
 import BannerGrab from './components/BannerGrab';
@@ -12,7 +13,7 @@ const App: React.FC = () => {
     apiKey: process.env.REACT_APP_API_KEY || 'your-secret-api-key-here'
   }));
 
-  const [activeTab, setActiveTab] = useState('website-check');
+  const [activeTab, setActiveTab] = useState('home');
   const [apiStatus, setApiStatus] = useState<'online' | 'offline' | 'checking'>('checking');
 
   useEffect(() => {
