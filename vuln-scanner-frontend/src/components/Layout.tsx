@@ -94,7 +94,24 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab = 'website-check', 
       {/* Navigation with 3D Cards */}
       <nav className="relative z-10 py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div 
+              className={`card-3d rounded-xl p-6 text-center group cursor-pointer transform transition-all duration-300 hover:scale-105 ${
+                activeTab === 'home' ? 'ring-2 ring-indigo-400/50 glow' : ''
+              }`}
+              onClick={() => handleTabClick('home')}
+            >
+              <div className="flex flex-col items-center space-y-3">
+                <div className={`p-3 rounded-full transition-all duration-300 ${
+                  activeTab === 'home' ? 'bg-indigo-500/20' : 'bg-indigo-500/10'
+                }`}>
+                  <Shield className="h-8 w-8 text-indigo-400" />
+                </div>
+                <h3 className="text-lg font-semibold text-white">Home</h3>
+                <p className="text-indigo-200 text-sm">Welcome & Overview</p>
+              </div>
+            </div>
+            
             <div 
               className={`card-3d rounded-xl p-6 text-center group cursor-pointer transform transition-all duration-300 hover:scale-105 ${
                 activeTab === 'website-check' ? 'ring-2 ring-blue-400/50 glow' : ''
