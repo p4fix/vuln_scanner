@@ -69,6 +69,13 @@ const HomePage: React.FC = () => {
         text: 'text-green-400',
         hover: 'hover:bg-green-500/20',
         glow: 'hover:shadow-green-500/25'
+      },
+      yellow: {
+        bg: 'bg-yellow-500/10',
+        border: 'border-yellow-500/20',
+        text: 'text-yellow-400',
+        hover: 'hover:bg-yellow-500/20',
+        glow: 'hover:shadow-yellow-500/25'
       }
     };
     return colors[color as keyof typeof colors] || colors.blue;
@@ -219,7 +226,7 @@ const HomePage: React.FC = () => {
             return (
               <div
                 key={index}
-                className={`card-3d rounded-xl p-6 text-center group cursor-pointer transform transition-all duration-300 hover:scale-105 ${colorClasses.border} ${colorClasses.hover}`}
+                className={`card-3d service-card rounded-xl p-6 text-center group cursor-pointer transform transition-all duration-300 hover:scale-105 ${colorClasses.border} ${colorClasses.hover}`}
               >
                 <div className="space-y-4">
                   <div className="flex justify-center">
@@ -229,10 +236,10 @@ const HomePage: React.FC = () => {
                   </div>
                   
                   <div className="space-y-2">
-                    <h3 className="text-lg font-semibold text-white group-hover:scale-105 transition-transform duration-300">
+                    <h3 className="text-lg font-semibold text-white text-pop group-hover:scale-105 transition-transform duration-300">
                       {feature.title}
                     </h3>
-                    <p className="text-blue-200 text-sm group-hover:text-white transition-colors duration-300">
+                    <p className="text-blue-200 text-sm text-pop group-hover:text-white transition-colors duration-300">
                       {feature.description}
                     </p>
                   </div>
