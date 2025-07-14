@@ -1,7 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { Shield, Globe, Server, Settings, Zap, Cpu, Network, ArrowRight, CheckCircle, AlertTriangle, Info } from 'lucide-react';
 
-const HomePage: React.FC = () => {
+interface HomePageProps {
+  onNavigate?: (tab: string) => void;
+}
+
+const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   const servicesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -45,6 +49,12 @@ const HomePage: React.FC = () => {
       color: 'green',
       features: ['Service identification', 'Version detection', 'Protocol analysis', 'Banner parsing']
     }
+  ];
+
+  const serviceTabMap = [
+    'website-check',
+    'port-scan',
+    'banner-grab',
   ];
 
   const getColorClasses = (color: string) => {
@@ -140,6 +150,7 @@ const HomePage: React.FC = () => {
               <div
                 key={index}
                 className={`card-3d service-card rounded-xl p-8 text-center group cursor-pointer transform transition-all duration-500 hover:scale-105 hover:-translate-y-2 ${colorClasses.border} ${colorClasses.hover} ${colorClasses.glow} stagger-animation`}
+                onClick={() => onNavigate && onNavigate(serviceTabMap[index])}
               >
                 <div className="space-y-6">
                   {/* Icon with floating animation */}
@@ -289,10 +300,16 @@ const HomePage: React.FC = () => {
               Choose from our comprehensive suite of security scanning tools and start your vulnerability assessment today.
             </p>
             <div className="flex justify-center space-x-4">
-              <button className="btn-3d px-8 py-3 rounded-lg font-medium text-white transition-all duration-300 hover:scale-105">
+              <button
+                className="btn-3d px-8 py-3 rounded-lg font-medium text-white transition-all duration-300 hover:scale-105"
+                onClick={() => onNavigate && onNavigate('website-check')}
+              >
                 Get Started
               </button>
-              <button className="btn-3d px-8 py-3 rounded-lg font-medium text-blue-200 transition-all duration-300 hover:scale-105">
+              <button
+                className="btn-3d px-8 py-3 rounded-lg font-medium text-blue-200 transition-all duration-300 hover:scale-105"
+                onClick={() => onNavigate && onNavigate('home')}
+              >
                 Learn More
               </button>
             </div>

@@ -40,7 +40,7 @@ const App: React.FC = () => {
   const renderContent = () => {
     switch (activeTab) {
       case 'home':
-        return <HomePage />;
+        return <HomePage onNavigate={handleTabChange} />;
       case 'website-check':
         return <WebsiteCheck apiService={apiService} />;
       case 'port-scan':
@@ -48,7 +48,7 @@ const App: React.FC = () => {
       case 'banner-grab':
         return <BannerGrab apiService={apiService} />;
       default:
-        return <HomePage />;
+        return <HomePage onNavigate={handleTabChange} />;
     }
   };
 
