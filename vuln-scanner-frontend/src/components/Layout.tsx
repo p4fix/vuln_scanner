@@ -162,6 +162,40 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab = 'website-check', 
                 <p className="text-green-200 text-sm">Extract service banners</p>
               </div>
             </div>
+            {/* About Us Card */}
+            <div 
+              className={`card-3d rounded-xl p-6 text-center group cursor-pointer transform transition-all duration-300 hover:scale-105 ${
+                activeTab === 'about' ? 'ring-2 ring-orange-400/50 glow' : ''
+              }`}
+              onClick={() => handleTabClick('about')}
+            >
+              <div className="flex flex-col items-center space-y-3">
+                <div className={`p-3 rounded-full transition-all duration-300 ${
+                  activeTab === 'about' ? 'bg-orange-500/20' : 'bg-orange-500/10'
+                }`}>
+                  <Activity className="h-8 w-8 text-orange-400" />
+                </div>
+                <h3 className="text-lg font-semibold text-white">About Us</h3>
+                <p className="text-orange-200 text-sm">Project & Team Info</p>
+              </div>
+            </div>
+            {/* Contact Card */}
+            <div 
+              className={`card-3d rounded-xl p-6 text-center group cursor-pointer transform transition-all duration-300 hover:scale-105 ${
+                activeTab === 'contact' ? 'ring-2 ring-pink-400/50 glow' : ''
+              }`}
+              onClick={() => handleTabClick('contact')}
+            >
+              <div className="flex flex-col items-center space-y-3">
+                <div className={`p-3 rounded-full transition-all duration-300 ${
+                  activeTab === 'contact' ? 'bg-pink-500/20' : 'bg-pink-500/10'
+                }`}>
+                  <Server className="h-8 w-8 text-pink-400" />
+                </div>
+                <h3 className="text-lg font-semibold text-white">Contact</h3>
+                <p className="text-pink-200 text-sm">Get in touch</p>
+              </div>
+            </div>
           </div>
         </div>
       </nav>

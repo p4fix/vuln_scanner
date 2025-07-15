@@ -5,6 +5,8 @@ import WebsiteCheck from './components/WebsiteCheck';
 import PortScan from './components/PortScan';
 import BannerGrab from './components/BannerGrab';
 import ConfigPanel from './components/ConfigPanel';
+import AboutUs from './components/AboutUs';
+import Contact from './components/Contact';
 import ApiService from './services/api';
 
 const App: React.FC = () => {
@@ -47,6 +49,10 @@ const App: React.FC = () => {
         return <PortScan apiService={apiService} />;
       case 'banner-grab':
         return <BannerGrab apiService={apiService} />;
+      case 'about':
+        return <AboutUs />;
+      case 'contact':
+        return <Contact />;
       default:
         return <HomePage onNavigate={handleTabChange} />;
     }
