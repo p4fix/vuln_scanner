@@ -19,7 +19,7 @@ const Contact: React.FC = () => {
       <h1 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Contact Us</h1>
       <p className="mb-4 text-gray-700 dark:text-gray-200">Have questions, feedback, or need support? Reach out to us below!</p>
       <div className="mb-6">
-        <p className="text-gray-700 dark:text-gray-200">Email: <a href="mailto:contact@vulnscanner.com" className="text-blue-600 dark:text-blue-400 underline">contact@vulnscanner.com</a></p>
+        <p className="text-gray-700 dark:text-gray-200">Email: <a href="mailto:vulnerability.scanner@gmail.com" className="text-blue-600 dark:text-blue-400 underline">vulnerability.scanner@gmail.com</a></p>
         <p className="text-gray-700 dark:text-gray-200">GitHub: <a href="https://github.com/your-repo-url" className="text-blue-600 dark:text-blue-400 underline" target="_blank" rel="noopener noreferrer">Project Repository</a></p>
       </div>
       <form onSubmit={handleSubmit} className="space-y-4">
