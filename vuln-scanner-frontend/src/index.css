@@ -391,15 +391,10 @@ html {
   box-shadow: 0 0 8px 2px rgba(100, 120, 255, 0.10) !important;
 } 
 
-// Text color for dark mode
-body.dark, .dark .glass, .dark .card-3d, .dark .btn-3d {
-  color: #f4f4f5;
+/* Ensure all text is dark in light mode and light in dark mode */
+body.light, .light .glass, .light .card-3d, .light .btn-3d, .light h1, .light h2, .light h3, .light h4, .light h5, .light h6, .light .font-bold, .light .font-semibold, .light p, .light span, .light label, .light div, .light a {
+  color: #232946 !important;
 }
-
-// Ensure all headings and important text have good contrast
-h1, h2, h3, h4, h5, h6, .font-bold, .font-semibold {
-  color: #232946;
-}
-.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6, .dark .font-bold, .dark .font-semibold {
-  color: #f4f4f5;
+body.dark, .dark .glass, .dark .card-3d, .dark .btn-3d, .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6, .dark .font-bold, .dark .font-semibold, .dark p, .dark span, .dark label, .dark div, .dark a {
+  color: #f4f4f5 !important;
 } 
