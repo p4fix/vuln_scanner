@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Shield, Globe, Server, Settings, Activity, Zap, Cpu, Network } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -7,7 +8,7 @@ interface LayoutProps {
   onTabChange?: (tab: string) => void;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, activeTab = 'website-check', onTabChange }) => {
+const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [darkMode, setDarkMode] = useState(() => {
     // Check localStorage for user preference
     return localStorage.getItem('theme') === 'dark';
@@ -24,12 +25,6 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab = 'website-check', 
       localStorage.setItem('theme', 'light');
     }
   }, [darkMode]);
-
-  const handleTabClick = (tab: string) => {
-    if (onTabChange) {
-      onTabChange(tab);
-    }
-  };
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -94,108 +89,61 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab = 'website-check', 
       {/* Navigation with 3D Cards */}
       <nav className="relative z-10 py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div 
-              className={`card-3d rounded-xl p-6 text-center group cursor-pointer transform transition-all duration-300 hover:scale-105 ${
-                activeTab === 'home' ? 'ring-2 ring-indigo-400/50 glow' : ''
-              }`}
-              onClick={() => handleTabClick('home')}
-            >
+          <div className="grid grid-cols-1 md:grid-cols-6 gap-6">
+            <Link to="/" className="card-3d rounded-xl p-6 text-center group cursor-pointer transform transition-all duration-300 hover:scale-105">
               <div className="flex flex-col items-center space-y-3">
-                <div className={`p-3 rounded-full transition-all duration-300 ${
-                  activeTab === 'home' ? 'bg-indigo-500/20' : 'bg-indigo-500/10'
-                }`}>
+                <div className="p-3 rounded-full bg-indigo-500/10">
                   <Shield className="h-8 w-8 text-indigo-400" />
                 </div>
                 <h3 className="text-lg font-semibold text-white">Home</h3>
                 <p className="text-indigo-200 text-sm">Welcome & Overview</p>
               </div>
-            </div>
-            
-            <div 
-              className={`card-3d rounded-xl p-6 text-center group cursor-pointer transform transition-all duration-300 hover:scale-105 ${
-                activeTab === 'website-check' ? 'ring-2 ring-blue-400/50 glow' : ''
-              }`}
-              onClick={() => handleTabClick('website-check')}
-            >
+            </Link>
+            <Link to="/website-check" className="card-3d rounded-xl p-6 text-center group cursor-pointer transform transition-all duration-300 hover:scale-105">
               <div className="flex flex-col items-center space-y-3">
-                <div className={`p-3 rounded-full transition-all duration-300 ${
-                  activeTab === 'website-check' ? 'bg-blue-500/20' : 'bg-blue-500/10'
-                }`}>
+                <div className="p-3 rounded-full bg-blue-500/10">
                   <Globe className="h-8 w-8 text-blue-400" />
                 </div>
                 <h3 className="text-lg font-semibold text-white">Website Check</h3>
                 <p className="text-blue-200 text-sm">Analyze website accessibility</p>
               </div>
-            </div>
-            
-            <div 
-              className={`card-3d rounded-xl p-6 text-center group cursor-pointer transform transition-all duration-300 hover:scale-105 ${
-                activeTab === 'port-scan' ? 'ring-2 ring-purple-400/50 glow' : ''
-              }`}
-              onClick={() => handleTabClick('port-scan')}
-            >
+            </Link>
+            <Link to="/port-scan" className="card-3d rounded-xl p-6 text-center group cursor-pointer transform transition-all duration-300 hover:scale-105">
               <div className="flex flex-col items-center space-y-3">
-                <div className={`p-3 rounded-full transition-all duration-300 ${
-                  activeTab === 'port-scan' ? 'bg-purple-500/20' : 'bg-purple-500/10'
-                }`}>
+                <div className="p-3 rounded-full bg-purple-500/10">
                   <Server className="h-8 w-8 text-purple-400" />
                 </div>
                 <h3 className="text-lg font-semibold text-white">Port Scanner</h3>
                 <p className="text-purple-200 text-sm">Scan open ports</p>
               </div>
-            </div>
-            
-            <div 
-              className={`card-3d rounded-xl p-6 text-center group cursor-pointer transform transition-all duration-300 hover:scale-105 ${
-                activeTab === 'banner-grab' ? 'ring-2 ring-green-400/50 glow' : ''
-              }`}
-              onClick={() => handleTabClick('banner-grab')}
-            >
+            </Link>
+            <Link to="/banner-grab" className="card-3d rounded-xl p-6 text-center group cursor-pointer transform transition-all duration-300 hover:scale-105">
               <div className="flex flex-col items-center space-y-3">
-                <div className={`p-3 rounded-full transition-all duration-300 ${
-                  activeTab === 'banner-grab' ? 'bg-green-500/20' : 'bg-green-500/10'
-                }`}>
+                <div className="p-3 rounded-full bg-green-500/10">
                   <Settings className="h-8 w-8 text-green-400" />
                 </div>
                 <h3 className="text-lg font-semibold text-white">Banner Grab</h3>
                 <p className="text-green-200 text-sm">Extract service banners</p>
               </div>
-            </div>
-            {/* About Us Card */}
-            <div 
-              className={`card-3d rounded-xl p-6 text-center group cursor-pointer transform transition-all duration-300 hover:scale-105 ${
-                activeTab === 'about' ? 'ring-2 ring-orange-400/50 glow' : ''
-              }`}
-              onClick={() => handleTabClick('about')}
-            >
+            </Link>
+            <Link to="/about" className="card-3d rounded-xl p-6 text-center group cursor-pointer transform transition-all duration-300 hover:scale-105">
               <div className="flex flex-col items-center space-y-3">
-                <div className={`p-3 rounded-full transition-all duration-300 ${
-                  activeTab === 'about' ? 'bg-orange-500/20' : 'bg-orange-500/10'
-                }`}>
+                <div className="p-3 rounded-full bg-orange-500/10">
                   <Activity className="h-8 w-8 text-orange-400" />
                 </div>
                 <h3 className="text-lg font-semibold text-white">About Us</h3>
                 <p className="text-orange-200 text-sm">Project & Team Info</p>
               </div>
-            </div>
-            {/* Contact Card */}
-            <div 
-              className={`card-3d rounded-xl p-6 text-center group cursor-pointer transform transition-all duration-300 hover:scale-105 ${
-                activeTab === 'contact' ? 'ring-2 ring-pink-400/50 glow' : ''
-              }`}
-              onClick={() => handleTabClick('contact')}
-            >
+            </Link>
+            <Link to="/contact" className="card-3d rounded-xl p-6 text-center group cursor-pointer transform transition-all duration-300 hover:scale-105">
               <div className="flex flex-col items-center space-y-3">
-                <div className={`p-3 rounded-full transition-all duration-300 ${
-                  activeTab === 'contact' ? 'bg-pink-500/20' : 'bg-pink-500/10'
-                }`}>
+                <div className="p-3 rounded-full bg-pink-500/10">
                   <Server className="h-8 w-8 text-pink-400" />
                 </div>
                 <h3 className="text-lg font-semibold text-white">Contact</h3>
                 <p className="text-pink-200 text-sm">Get in touch</p>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </nav>

@@ -1,11 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import { Shield, Globe, Server, Settings, Zap, Cpu, Network, ArrowRight, CheckCircle, AlertTriangle, Info } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface HomePageProps {
   onNavigate?: (tab: string) => void;
 }
 
-const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
+const HomePage: React.FC = () => {
+  const navigate = useNavigate();
   const servicesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -52,9 +54,9 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   ];
 
   const serviceTabMap = [
-    'website-check',
-    'port-scan',
-    'banner-grab',
+    '/website-check',
+    '/port-scan',
+    '/banner-grab',
   ];
 
   const getColorClasses = (color: string) => {
@@ -150,7 +152,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               <div
                 key={index}
                 className={`card-3d service-card rounded-xl p-8 text-center group cursor-pointer transform transition-all duration-500 hover:scale-105 hover:-translate-y-2 ${colorClasses.border} ${colorClasses.hover} ${colorClasses.glow} stagger-animation`}
-                onClick={() => onNavigate && onNavigate(serviceTabMap[index])}
+                onClick={() => navigate(serviceTabMap[index])}
               >
                 <div className="space-y-6">
                   {/* Icon with floating animation */}
@@ -302,13 +304,13 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <div className="flex justify-center space-x-4">
               <button
                 className="btn-3d px-8 py-3 rounded-lg font-medium text-white transition-all duration-300 hover:scale-105"
-                onClick={() => onNavigate && onNavigate('website-check')}
+                onClick={() => navigate('/website-check')}
               >
                 Get Started
               </button>
               <button
                 className="btn-3d px-8 py-3 rounded-lg font-medium text-blue-200 transition-all duration-300 hover:scale-105"
-                onClick={() => onNavigate && onNavigate('home')}
+                onClick={() => navigate('/')}
               >
                 Learn More
               </button>
