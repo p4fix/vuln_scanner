@@ -398,3 +398,90 @@ body.light, .light .glass, .light .card-3d, .light .btn-3d, .light h1, .light h2
 body.dark, .dark .glass, .dark .card-3d, .dark .btn-3d, .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6, .dark .font-bold, .dark .font-semibold, .dark p, .dark span, .dark label, .dark div, .dark a {
   color: #f4f4f5 !important;
 } 
+
+/* iOS-specific improvements */
+@supports (-webkit-touch-callout: none) {
+  .glass {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+  
+  /* Prevent rubber-band scrolling effect */
+  html {
+    position: fixed;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  body {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    height: 100%;
+  }
+
+  /* Improve touch targets */
+  button, 
+  a,
+  input[type="submit"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Remove tap highlight */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Smooth scrolling for non-iOS */
+@supports not (-webkit-touch-callout: none) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Improved touch feedback */
+.touch-feedback {
+  position: relative;
+  overflow: hidden;
+}
+
+.touch-feedback::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+.touch-feedback:active::after {
+  opacity: 0;
+  transform: scale(0, 0);
+  transition: all 0.6s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Safe area insets for notched devices */
+@supports (padding: max(0px)) {
+  .safe-top {
+    padding-top: max(env(safe-area-inset-top), 1rem);
+  }
+  
+  .safe-bottom {
+    padding-bottom: max(env(safe-area-inset-bottom), 1rem);
+  }
+  
+  .safe-left {
+    padding-left: max(env(safe-area-inset-left), 1rem);
+  }
+  
+  .safe-right {
+    padding-right: max(env(safe-area-inset-right), 1rem);
+  }
+} 
