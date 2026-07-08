@@ -1,4 +1,4 @@
-# config.py
+﻿# config.py
 import os
 from typing import List
 
@@ -8,19 +8,26 @@ class Config:
     DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
     HOST = os.getenv('HOST', '0.0.0.0')
     PORT = int(os.getenv('PORT', 5000))
-    
+
     # Security Settings
-    ALLOWED_HOSTS = [
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "http://localhost:5000",
+    # Comma-separated list of allowed CORS origins, e.g.:
+    # ALLOWED_HOSTS=https://vuln-scanner-sigma.vercel.app,http://localhost:3000
+    _default_hosts = (
+        "http://localhost:3000,"
+        "http://127.0.0.1:3000,"
+        "http://localhost:5000,"
         "http://127.0.0.1:5000"
+    )
+    ALLOWED_HOSTS: List[str] = [
+        origin.strip()
+        for origin in os.getenv('ALLOWED_HOSTS', _default_hosts).split(',')
+        if origin.strip()
     ]
     MAX_REQUESTS_PER_MINUTE = int(os.getenv('MAX_REQUESTS_PER_MINUTE', 60))
     REQUEST_TIMEOUT = int(os.getenv('REQUEST_TIMEOUT', 10))
-    
+
     # Scanner Settings
     SOCKET_TIMEOUT = 5
     HTTP_TIMEOUT = 10
     MAX_PORT = 65535
-    MIN_PORT = 1 
+    MIN_PORT = 1
